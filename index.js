@@ -41,14 +41,15 @@ const server = http.createServer((req, res) => {
           response.data = null;
        
         } else {
-           todos.push({ id, task });
-        status = 201;
-        response.success = true;
-        response.data = todos;
+          todos.push({ id, task });
+          status = 201;
+          response.success = true;
+          response.data = todos;
+        }
+        res.writeHead(status, { "Content-Type": "application/json" });
+        res.end(JSON.stringify(response));
       }
-      res.writeHead(status, { "Content-Type": "application/json" });
-      res.end(JSON.stringify(response));
-    });
+    })
 });
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => console.log("Sever is running on port :", PORT));
